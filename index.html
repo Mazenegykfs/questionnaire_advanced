@@ -1,38 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questionnaire Results Analysis</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Include SheetJS and Chart.js libraries -->
-    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-        }
-        /* Custom scrollbar for better aesthetics */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #e5e7eb;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #9ca3af;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #6b7280;
-        }
-        /* Fix for table header cells */
-        #resultsTable th {
-            white-space: nowrap;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire Results Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Include SheetJS and Chart.js libraries -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e5e7eb;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #9ca3af;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
+            border-radius: 10px;
+        }
+        /* Fix for table header cells */
+        #resultsTable th {
+            white-space: nowrap;
+        }
         .ranking-option {
             display: flex;
             align-items: center;
@@ -74,35 +75,35 @@
         .ranking-option-buttons .remove-button:hover {
             background-color: #dc2626; /* Red 600 */
         }
-    </style>
+    </style>
 </head>
 <body class="p-6 md:p-12">
-    <!-- Language switch button container with fixed position -->
-    <div style="position: fixed; top: 1.5rem; left: 1.5rem; z-index: 100;" class="flex flex-col space-y-2">
-        <div id="langToggle" class="flex rounded-lg shadow-md overflow-hidden cursor-pointer transition-colors duration-300">
-            <span id="lang-en" class="px-6 py-3 font-semibold transition-colors duration-300">English</span>
-            <span id="lang-ar" class="px-6 py-3 font-semibold transition-colors duration-300">العربية</span>
-        </div>
+    <!-- Language switch button container with fixed position -->
+    <div style="position: fixed; top: 1.5rem; left: 1.5rem; z-index: 100;" class="flex flex-col space-y-2">
+        <div id="langToggle" class="flex rounded-lg shadow-md overflow-hidden cursor-pointer transition-colors duration-300">
+            <span id="lang-en" class="px-6 py-3 font-semibold transition-colors duration-300">English</span>
+            <span id="lang-ar" class="px-6 py-3 font-semibold transition-colors duration-300">العربية</span>
+        </div>
         <!-- New template buttons -->
         <div class="flex space-x-2">
-            <button id="showVerticalTemplateBtn" class="px-4 py-2 bg-gray-300 text-gray-800 text-sm font-semibold rounded-lg shadow-md hover:bg-gray-400 transition-colors duration-300">
-                Vertical Template
+            <button id="downloadVerticalTemplateBtn" class="px-4 py-2 bg-gray-300 text-gray-800 text-sm font-semibold rounded-lg shadow-md hover:bg-gray-400 transition-colors duration-300">
+                Download Vertical Template
             </button>
-            <button id="showHorizontalTemplateBtn" class="px-4 py-2 bg-gray-300 text-gray-800 text-sm font-semibold rounded-lg shadow-md hover:bg-gray-400 transition-colors duration-300">
-                Horizontal Template
+            <button id="downloadHorizontalTemplateBtn" class="px-4 py-2 bg-gray-300 text-gray-800 text-sm font-semibold rounded-lg shadow-md hover:bg-gray-400 transition-colors duration-300">
+                Download Horizontal Template
             </button>
         </div>
-    </div>
-    
-    <!-- Logo at the top right -->
-    <div style="position: fixed; top: 1.5rem; right: 1.5rem; z-index: 100;">
-        <img src="00.png" alt="Logo" class="h-20 w-20  shadow-md">
-    </div>
+    </div>
+    
+    <!-- Logo at the top right -->
+    <div style="position: fixed; top: 1.5rem; right: 1.5rem; z-index: 100;">
+        <img src="00.png" alt="Logo" class="h-20 w-20  shadow-md">
+    </div>
 
-    <div class="max-w-7xl mx-auto bg-white p-8 rounded-2xl shadow-xl">
-        <h1 id="mainTitle" class="text-3xl font-bold text-center mb-1 text-gray-800">Questionnaire Results Analysis</h1>
-        <p class="text-center text-gray-600 mb-6 text-sm" id="developerCredit">Developed by Dr. Mazen Badawy – Doctorate of English Teaching & Testing</p>
-        <p id="subtitle" class="text-center text-gray-600 mb-8">Upload your Excel (XLSX) file with the questionnaire results to view the analysis.</p>
+    <div class="max-w-7xl mx-auto bg-white p-8 rounded-2xl shadow-xl">
+        <h1 id="mainTitle" class="text-3xl font-bold text-center mb-1 text-gray-800">Questionnaire Results Analysis</h1>
+        <p class="text-center text-gray-600 mb-6 text-sm" id="developerCredit">Developed by Dr. Mazen Badawy – Doctorate of English Teaching & Testing</p>
+        <p id="subtitle" class="text-center text-gray-600 mb-8">Upload your Excel (XLSX) file with the questionnaire results to view the analysis.</p>
 
         <!-- Data Orientation switch button -->
         <div class="flex flex-col items-center space-y-4 mb-8">
@@ -113,30 +114,30 @@
             </div>
         </div>
 
-        <!-- File input and loading indicator -->
-        <div id="fileUploadSection" class="flex flex-col items-center space-y-4 mb-8 hidden">
-            <label for="xlsxFile" class="block w-full text-center">
-                <span id="fileButtonText" class="inline-block px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition-colors duration-300 cursor-pointer">
-                    Choose XLSX File
-                </span>
-                <input type="file" id="xlsxFile" class="hidden" accept=".xlsx, .xls">
-            </label>
-            <div id="loadingMessage" class="hidden text-gray-500">
-                Processing data, please wait...
-            </div>
-            <!-- Message Box for errors -->
-            <div id="messageBox" class="hidden bg-red-100 border-r-4 border-red-500 text-red-700 p-4 w-full rounded-md" role="alert">
-                <div class="flex items-center">
-                    <svg class="h-6 w-6 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-8a1 1 112 0 1 11-2z" clip-rule="evenodd"></path>
-                    </svg>
-                    <div>
-                        <p class="font-bold" id="messageTitle">Error!</p>
-                        <p id="messageText" class="text-sm"></p> <!-- Added missing element -->
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- File input and loading indicator -->
+        <div id="fileUploadSection" class="flex flex-col items-center space-y-4 mb-8 hidden">
+            <label for="xlsxFile" class="block w-full text-center">
+                <span id="fileButtonText" class="inline-block px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition-colors duration-300 cursor-pointer">
+                    Choose XLSX File
+                </span>
+                <input type="file" id="xlsxFile" class="hidden" accept=".xlsx, .xls">
+            </label>
+            <div id="loadingMessage" class="hidden text-gray-500">
+                Processing data, please wait...
+            </div>
+            <!-- Message Box for errors -->
+            <div id="messageBox" class="hidden bg-red-100 border-r-4 border-red-500 text-red-700 p-4 w-full rounded-md" role="alert">
+                <div class="flex items-center">
+                    <svg class="h-6 w-6 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-8a1 1 112 0 1 11-2z" clip-rule="evenodd"></path>
+                    </svg>
+                    <div>
+                        <p class="font-bold" id="messageTitle">Error!</p>
+                        <p id="messageText" class="text-sm"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- New section for scale order definition (Ranking Widget) -->
         <div id="scaleOrderSection" class="hidden w-full max-w-2xl mx-auto mb-8 p-6 bg-gray-50 rounded-lg shadow-inner">
@@ -153,140 +154,84 @@
                     </svg>
                     <div>
                         <p class="font-bold" id="scaleOrderMessageTitle">Error!</p>
-                        <p id="scaleOrderMessageText" class="text-sm"></p> <!-- Added missing element -->
+                        <p id="scaleOrderMessageText" class="text-sm"></p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- New section for domain analysis -->
-        <div id="domainSection" class="hidden w-full max-w-2xl mx-auto mb-8 p-6 bg-gray-50 rounded-lg shadow-inner">
-            <h2 id="domainTitle" class="text-xl font-bold text-gray-700 mb-4">Define Domains (Optional)</h2>
-            <p id="domainSubtitle" class="text-gray-600 mb-4">Enter the number of items for each domain, separated by commas (e.g., 5, 3, 7).</p>
+        <!-- New section for domain analysis -->
+        <div id="domainSection" class="hidden w-full max-w-2xl mx-auto mb-8 p-6 bg-gray-50 rounded-lg shadow-inner">
+            <h2 id="domainTitle" class="text-xl font-bold text-gray-700 mb-4">Define Domains (Optional)</h2>
+            <p id="domainSubtitle" class="text-gray-600 mb-4">Enter the number of items for each domain, separated by commas (e.g., 5, 3, 7).</p>
             <p id="totalItemsDisplay" class="text-gray-700 font-semibold mb-4"></p>
-            <div class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 space-x-reverse:rtl md:space-x-reverse:ltr">
-                <input type="text" id="domainInput" class="flex-1 w-full md:w-auto px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="e.g., 5, 3, 7">
-            </div>
-            <!-- Message Box for domain errors -->
-            <div id="domainMessageBox" class="hidden bg-red-100 border-r-4 border-red-500 text-red-700 p-4 w-full rounded-md mt-4" role="alert">
-                <div class="flex items-center">
-                    <svg class="h-6 w-6 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-8a1 1 112 0 1 11-2z" clip-rule="evenodd"></path>
-                    </svg>
-                    <div>
-                        <p class="font-bold" id="domainMessageTitle">Error!</p>
+            <div class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 space-x-reverse:rtl md:space-x-reverse:ltr">
+                <input type="text" id="domainInput" class="flex-1 w-full md:w-auto px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="e.g., 5, 3, 7">
+            </div>
+            <!-- Message Box for domain errors -->
+            <div id="domainMessageBox" class="hidden bg-red-100 border-r-4 border-red-500 text-red-700 p-4 w-full rounded-md mt-4" role="alert">
+                <div class="flex items-center">
+                    <svg class="h-6 w-6 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-8a1 1 112 0 1 11-2z" clip-rule="evenodd"></path>
+                    </svg>
+                    <div>
+                        <p class="font-bold" id="domainMessageTitle">Error!</p>
                         <p id="domainMessageText" class="text-sm"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Action buttons container -->
-        <div id="actionButtons" class="hidden flex flex-row justify-center space-x-4 space-x-reverse:rtl mb-8">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Action buttons container -->
+        <div id="actionButtons" class="hidden flex flex-row justify-center space-x-4 space-x-reverse:rtl mb-8">
             <button id="analyzeButton" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300">
                 Analyze Data
             </button>
-            <button id="exportButton" class="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition-colors duration-300">
-                Export to XLSX
-            </button>
+            <button id="exportButton" class="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition-colors duration-300">
+                Export to XLSX
+            </button>
             <button id="copyTableButton" class="px-6 py-3 bg-teal-600 text-white font-semibold rounded-lg shadow-md hover:bg-teal-700 transition-colors duration-300">
                 Copy Table
             </button>
-        </div>
-
-
-        <!-- The results table container -->
-        <div id="resultsContainer" class="hidden overflow-x-auto">
-            <!-- Tables for each domain will be injected here -->
-        </div>
-
-        <!-- Charts container -->
-        <div id="chartContainer" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-            <!-- Charts will be injected here -->
-            <div class="p-6 bg-gray-50 rounded-xl shadow-inner flex flex-col justify-center items-center">
-                <h3 class="text-lg font-semibold mb-4 text-gray-700" id="fullChartTitle"></h3>
-                <div class="h-64 w-full">
-                    <canvas id="fullResultsChart"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Template Guide Container (initially hidden) -->
-    <div id="templateGuideContainer" class="hidden fixed top-28 left-12 z-10 bg-white p-6 rounded-lg shadow-xl border border-gray-200 w-96 max-w-full">
-        <div class="flex justify-between items-center mb-4">
-            <h3 id="templateGuideTitle" class="text-lg font-bold text-gray-800"></h3>
-            <button id="closeTemplateGuideBtn" class="text-gray-500 hover:text-gray-700 font-bold text-xl">&times;</button>
         </div>
-        <div id="verticalTemplateContent" class="hidden">
-            <p id="verticalTemplateDescription" class="text-gray-600 mb-2 text-sm"></p>
-            <table class="w-full text-sm text-left text-gray-700 border border-gray-300 rounded-md overflow-hidden">
-                <thead class="bg-gray-100">
-                    <tr>
-                        <th class="px-3 py-2 border-r border-b" id="vtHeaderItem"></th>
-                        <th class="px-3 py-2 border-r border-b" id="vtHeaderResp1"></th>
-                        <th class="px-3 py-2 border-b" id="vtHeaderResp2"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="px-3 py-2 border-r border-b">Question 1</td>
-                        <td class="px-3 py-2 border-r border-b">Agree</td>
-                        <td class="px-3 py-2 border-b">Disagree</td>
-                    </tr>
-                    <tr>
-                        <td class="px-3 py-2 border-r">Question 2</td>
-                        <td class="px-3 py-2 border-r">Neutral</td>
-                        <td class="px-3 py-2">Agree</td>
-                    </tr>
-                </tbody>
-            </table>
+
+
+        <!-- The results table container -->
+        <div id="resultsContainer" class="hidden overflow-x-auto">
+            <!-- Tables for each domain will be injected here -->
         </div>
-        <div id="horizontalTemplateContent" class="hidden">
-            <p id="horizontalTemplateDescription" class="text-gray-600 mb-2 text-sm"></p>
-            <table class="w-full text-sm text-left text-gray-700 border border-gray-300 rounded-md overflow-hidden">
-                <thead class="bg-gray-100">
-                    <tr>
-                        <th class="px-3 py-2 border-r border-b" id="htHeaderEmpty"></th>
-                        <th class="px-3 py-2 border-r border-b" id="htHeaderItem1"></th>
-                        <th class="px-3 py-2 border-b" id="htHeaderItem2"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="px-3 py-2 border-r border-b" id="htRow1Resp">Respondent 1</td>
-                        <td class="px-3 py-2 border-r border-b">Agree</td>
-                        <td class="px-3 py-2 border-b">Neutral</td>
-                    </tr>
-                    <tr>
-                        <td class="px-3 py-2 border-r">Respondent 2</td>
-                        <td class="px-3 py-2 border-r">Disagree</td>
-                        <td class="px-3 py-2">Agree</td>
-                    </tr>
-                </tbody>
-            </table>
+
+        <!-- Charts container -->
+        <div id="chartContainer" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
+            <!-- Charts will be injected here -->
+            <div class="p-6 bg-gray-50 rounded-xl shadow-inner flex flex-col justify-center items-center">
+                <h3 class="text-lg font-semibold mb-4 text-gray-700" id="fullChartTitle"></h3>
+                <div class="h-64 w-full">
+                    <canvas id="fullResultsChart"></canvas>
+                </div>
+            </div>
         </div>
     </div>
 
-    <script>
+    <script>
     document.addEventListener('DOMContentLoaded', (event) => {
-        // Get references to DOM elements
-        const xlsxFile = document.getElementById('xlsxFile');
+        // Get references to DOM elements
+        const xlsxFile = document.getElementById('xlsxFile');
         const fileUploadSection = document.getElementById('fileUploadSection');
-        const loadingMessage = document.getElementById('loadingMessage');
-        const resultsContainer = document.getElementById('resultsContainer');
-        const chartContainer = document.getElementById('chartContainer');
-        const messageBox = document.getElementById('messageBox');
-        const messageText = document.getElementById('messageText');
-        const exportButton = document.getElementById('exportButton');
-        const copyTableButton = document.getElementById('copyTableButton'); // New button
-        const langToggle = document.getElementById('langToggle');
-        const langEnSpan = document.getElementById('lang-en');
-        const langArSpan = document.getElementById('lang-ar');
-        const domainSection = document.getElementById('domainSection');
-        const domainInput = document.getElementById('domainInput');
-        const analyzeButton = document.getElementById('analyzeButton');
-        const actionButtons = document.getElementById('actionButtons');
+        const loadingMessage = document.getElementById('loadingMessage');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const chartContainer = document.getElementById('chartContainer');
+        const messageBox = document.getElementById('messageBox');
+        const messageText = document.getElementById('messageText');
+        const exportButton = document.getElementById('exportButton');
+        const copyTableButton = document.getElementById('copyTableButton');
+        const langToggle = document.getElementById('langToggle');
+        const langEnSpan = document.getElementById('lang-en');
+        const langArSpan = document.getElementById('lang-ar');
+        const domainSection = document.getElementById('domainSection');
+        const domainInput = document.getElementById('domainInput');
+        const analyzeButton = document.getElementById('analyzeButton');
+        const actionButtons = document.getElementById('actionButtons');
         const totalItemsDisplay = document.getElementById('totalItemsDisplay');
 
         // Data orientation elements
@@ -302,55 +247,50 @@
         const scaleOrderMessageText = document.getElementById('scaleOrderMessageText');
         const scaleOrderMessageTitle = document.getElementById('scaleOrderMessageTitle');
 
-        // Domain message box elements (newly added)
+        // Domain message box elements
         const domainMessageBox = document.getElementById('domainMessageBox');
         const domainMessageText = document.getElementById('domainMessageText');
         const domainMessageTitle = document.getElementById('domainMessageTitle');
 
-        // Template buttons and guide elements
-        const showVerticalTemplateBtn = document.getElementById('showVerticalTemplateBtn');
-        const showHorizontalTemplateBtn = document.getElementById('showHorizontalTemplateBtn');
-        const templateGuideContainer = document.getElementById('templateGuideContainer');
-        const closeTemplateGuideBtn = document.getElementById('closeTemplateGuideBtn');
-        const templateGuideTitle = document.getElementById('templateGuideTitle');
-        const verticalTemplateContent = document.getElementById('verticalTemplateContent');
-        const horizontalTemplateContent = document.getElementById('horizontalTemplateContent');
+        // Template buttons (now for download)
+        const downloadVerticalTemplateBtn = document.getElementById('downloadVerticalTemplateBtn');
+        const downloadHorizontalTemplateBtn = document.getElementById('downloadHorizontalTemplateBtn');
 
 
-        // Define language data for easy switching
-        const languageData = {
-            en: {
-                title: 'Questionnaire Results Analysis',
-                subtitle: 'Upload your Excel (XLSX) file with the questionnaire results to view the analysis.',
-                fileButton: 'Choose XLSX File',
-                loading: 'Processing data, please wait...',
-                error: 'Error!',
-                fileError: 'Please select an Excel (XLSX) file.',
-                parseError: 'An error occurred while processing the file. Please ensure it is a valid Excel (XLSX) file.',
-                emptyFile: 'The file is empty or contains only one row.',
-                langButton: 'العربية',
-                exportButton: 'Export to XLSX',
-                copyTableButton: 'Copy Table', // New translation
-                tableCopied: 'Table copied to clipboard!', // New translation
-                analyzeButton: 'Analyze Data',
-                domainTitle: 'Define Domains (Optional)',
-                domainSubtitle: 'Enter the number of items for each domain, separated by commas (e.g., 5, 3, 7).',
+        // Define language data for easy switching
+        const languageData = {
+            en: {
+                title: 'Questionnaire Results Analysis',
+                subtitle: 'Upload your Excel (XLSX) file with the questionnaire results to view the analysis.',
+                fileButton: 'Choose XLSX File',
+                loading: 'Processing data, please wait...',
+                error: 'Error!',
+                fileError: 'Please select an Excel (XLSX) file.',
+                parseError: 'An error occurred while processing the file. Please ensure it is a valid Excel (XLSX) file.',
+                emptyFile: 'The file is empty or contains only one row.',
+                langButton: 'العربية',
+                exportButton: 'Export to XLSX',
+                copyTableButton: 'Copy Table',
+                tableCopied: 'Table copied to clipboard!',
+                analyzeButton: 'Analyze Data',
+                domainTitle: 'Define Domains (Optional)',
+                domainSubtitle: 'Enter the number of items for each domain, separated by commas (e.g., 5, 3, 7).',
                 totalItemsDisplay: 'Total items identified: {total}',
-                domainNumber: 'Domain {number}',
-                domainAverages: 'Domain Averages',
-                domainItemsError: 'The total number of items specified ({sum}) does not match the total number of items in the file ({total}).',
-                tableHeaders: {
-                    no: 'No.',
-                    item: 'Item',
-                    frequency: 'Frequency',
-                    percentage: 'Percentage',
-                    total: 'Total',
-                    mean: 'Mean',
-                    sd: 'SD',
-                    rank: 'Rank'
-                },
-                chartTitle: 'Percentage Distribution of Responses',
-                domainChartTitle: 'Percentage Distribution for Domain {number}',
+                domainNumber: 'Domain {number}',
+                domainAverages: 'Domain Averages',
+                domainItemsError: 'The total number of items specified ({sum}) does not match the total number of items in the file ({total}).',
+                tableHeaders: {
+                    no: 'No.',
+                    item: 'Item',
+                    frequency: 'Frequency',
+                    percentage: 'Percentage',
+                    total: 'Total',
+                    mean: 'Mean',
+                    sd: 'SD',
+                    rank: 'Rank'
+                },
+                chartTitle: 'Percentage Distribution of Responses',
+                domainChartTitle: 'Percentage Distribution for Domain {number}',
                 dataOrientationLabel: 'Data Orientation:',
                 orientationVertical: 'Vertical',
                 orientationHorizontal: 'Horizontal',
@@ -359,52 +299,49 @@
                 scaleOrderEmpty: 'Please add at least one response category.',
                 scaleOrderDuplicate: 'Duplicate response category found. Please ensure all categories are unique.',
                 templateButtons: {
-                    vertical: 'Vertical Template',
-                    horizontal: 'Horizontal Template'
+                    vertical: 'Download Vertical Template',
+                    horizontal: 'Download Horizontal Template'
                 },
-                templateGuide: {
-                    title: 'XLSX File Template Guide',
-                    verticalDesc: 'For Vertical data, items are in Column A, and responses start from Column B:',
-                    horizontalDesc: 'For Horizontal data, items are in Row 1 (starting from Column B), and responses start from Row 2:',
+                templateGuide: { // These are now used for template content, not guide display
                     vtHeaderItem: 'Item Name',
                     vtHeaderResp: 'Response',
                     htHeaderEmpty: 'ID/Empty',
                     htHeaderItem: 'Item',
                     htRowResp: 'Respondent'
                 }
-            },
-            ar: {
-                title: 'تحليل نتائج الاستبيان',
-                subtitle: 'قم بتحميل ملف Excel (XLSX) الخاص بنتائج الاستبيان لعرض التحليل.',
-                fileButton: 'اختر ملف XLSX',
-                loading: 'جاري تحميل وتحليل البيانات، يرجى الانتظار...',
-                error: 'خطأ!',
-                fileError: 'يرجى تحديد ملف Excel (XLSX).',
-                parseError: 'حدث خطأ أثناء معالجة الملف. يرجى التأكد من أنه ملف Excel (XLSX) صحيح.',
-                emptyFile: 'الملف فارغ أو يحتوي على صف واحد فقط.',
-                langButton: 'English',
-                exportButton: 'تصدير إلى XLSX',
-                copyTableButton: 'نسخ الجدول', // New translation
-                tableCopied: 'تم نسخ الجدول إلى الحافظة!', // New translation
-                analyzeButton: 'تحليل البيانات',
-                domainTitle: 'تحديد المجالات (اختياري)',
-                domainSubtitle: 'أدخل عدد البنود لكل مجال، مفصولة بفواصل (مثال: 5, 3, 7).',
+            },
+            ar: {
+                title: 'تحليل نتائج الاستبيان',
+                subtitle: 'قم بتحميل ملف Excel (XLSX) الخاص بنتائج الاستبيان لعرض التحليل.',
+                fileButton: 'اختر ملف XLSX',
+                loading: 'جاري تحميل وتحليل البيانات، يرجى الانتظار...',
+                error: 'خطأ!',
+                fileError: 'يرجى تحديد ملف Excel (XLSX).',
+                parseError: 'حدث خطأ أثناء معالجة الملف. يرجى التأكد من أنه ملف Excel (XLSX) صحيح.',
+                emptyFile: 'الملف فارغ أو يحتوي على صف واحد فقط.',
+                langButton: 'English',
+                exportButton: 'تصدير إلى XLSX',
+                copyTableButton: 'نسخ الجدول',
+                tableCopied: 'تم نسخ الجدول إلى الحافظة!',
+                analyzeButton: 'تحليل البيانات',
+                domainTitle: 'تحديد المجالات (اختياري)',
+                domainSubtitle: 'أدخل عدد البنود لكل مجال، مفصولة بفواصل (مثال: 5, 3, 7).',
                 totalItemsDisplay: 'إجمالي البنود المحددة: {total}',
-                domainNumber: 'المجال {number}',
-                domainAverages: 'متوسطات المجال',
-                domainItemsError: 'مجموع البنود المحددة ({sum}) لا يتطابق مع العدد الإجمالي للبنود في الملف ({total}).',
-                tableHeaders: {
-                    no: 'الرقم',
-                    item: 'العناصر',
-                    frequency: 'التكرار',
-                    percentage: 'النسبة المئوية',
-                    total: 'الإجمالي',
-                    mean: 'المتوسط',
-                    sd: 'الانحراف المعياري',
-                    rank: 'الترتيب'
-                },
-                chartTitle: 'توزيع الاستجابات بالنسبة المئوية',
-                domainChartTitle: 'توزيع الاستجابات بالنسبة المئوية للمجال {number}',
+                domainNumber: 'المجال {number}',
+                domainAverages: 'متوسطات المجال',
+                domainItemsError: 'مجموع البنود المحددة ({sum}) لا يتطابق مع العدد الإجمالي للبنود في الملف ({total}).',
+                tableHeaders: {
+                    no: 'الرقم',
+                    item: 'العناصر',
+                    frequency: 'التكرار',
+                    percentage: 'النسبة المئوية',
+                    total: 'الإجمالي',
+                    mean: 'المتوسط',
+                    sd: 'الانحراف المعياري',
+                    rank: 'الترتيب'
+                },
+                chartTitle: 'توزيع الاستجابات بالنسبة المئوية',
+                domainChartTitle: 'توزيع الاستجابات بالنسبة المئوية للمجال {number}',
                 dataOrientationLabel: 'اتجاه البيانات:',
                 orientationVertical: 'عمودي',
                 orientationHorizontal: 'أفقي',
@@ -413,49 +350,46 @@
                 scaleOrderEmpty: 'الرجاء إضافة فئة استجابة واحدة على الأقل.',
                 scaleOrderDuplicate: 'تم العثور على فئة استجابة مكررة. يرجى التأكد من أن جميع الفئات فريدة.',
                 templateButtons: {
-                    vertical: 'قالب عمودي',
-                    horizontal: 'قالب أفقي'
+                    vertical: 'تنزيل قالب عمودي',
+                    horizontal: 'تنزيل قالب أفقي'
                 },
-                templateGuide: {
-                    title: 'دليل قالب ملف XLSX',
-                    verticalDesc: 'للبيانات العمودية، تكون البنود في العمود A، وتبدأ الاستجابات من العمود B:',
-                    horizontalDesc: 'للبيانات الأفقية، تكون البنود في الصف 1 (بدءًا من العمود B)، وتبدأ الاستجابات من الصف 2:',
+                templateGuide: { // These are now used for template content, not guide display
                     vtHeaderItem: 'اسم البند',
                     vtHeaderResp: 'الاستجابة',
                     htHeaderEmpty: 'المعرف/فارغ',
                     htHeaderItem: 'البند',
                     htRowResp: 'المستجيب'
                 }
-            }
-        };
+            }
+        };
 
-        // Define a default mapping for Likert scale responses to numerical values.
-        const defaultResponseValueMap = {
-            'أوافق تماما': 5,
-            'أوافق': 4,
-            'أوافق إلي حد ما': 3,
-            'لا أوافق': 2,
-            'لا أوافق مطلقا': 1,
+        // Define a default mapping for Likert scale responses to numerical values.
+        const defaultResponseValueMap = {
+            'أوافق تماما': 5,
+            'أوافق': 4,
+            'أوافق إلي حد ما': 3,
+            'لا أوافق': 2,
+            'لا أوافق مطلقا': 1,
             'Strongly Agree': 5,
             'Agree': 4,
             'Neutral': 3,
             'Disagree': 2,
             'Strongly Disagree': 1
-        };
+        };
         let currentResponseValueMap = { ...defaultResponseValueMap }; // Active map, can be overridden
         let currentScaleOptions = Object.keys(defaultResponseValueMap).sort((a, b) => defaultResponseValueMap[b] - defaultResponseValueMap[a]);
 
-        const responseColors = [
-            'rgb(54, 162, 235)', // Light blue for positive
-            'rgb(75, 192, 192)', // Green for agree
-            'rgb(255, 205, 86)', // Yellow for neutral
-            'rgb(255, 99, 132)', // Red for disagree
-            'rgb(201, 203, 207)'  // Grey for strongly disagree
-        ];
-        
-        let currentLang = 'en';
+        const responseColors = [
+            'rgb(54, 162, 235)', // Light blue for positive
+            'rgb(75, 192, 192)', // Green for agree
+            'rgb(255, 205, 86)', // Yellow for neutral
+            'rgb(255, 99, 132)', // Red for disagree
+            'rgb(201, 203, 207)'  // Grey for strongly disagree
+        ];
+        
+        let currentLang = 'en';
         let dataOrientation = 'vertical'; // Default data orientation
-        let allCharts = {}; // Store chart instances to destroy them later
+        let allCharts = {}; // Store chart instances to destroy them later
 
         /**
          * Transposes a 2D array.
@@ -479,40 +413,40 @@
             return transposed;
         }
 
-        // Event listener for file selection
-        xlsxFile.addEventListener('change', (event) => {
-            const file = event.target.files[0];
-            if (!file) {
-                showMessage(languageData[currentLang].fileError, 'error');
-                return;
-            }
+        // Event listener for file selection
+        xlsxFile.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (!file) {
+                showMessage(languageData[currentLang].fileError, 'error');
+                return;
+            }
 
-            if (loadingMessage) loadingMessage.classList.remove('hidden');
+            if (loadingMessage) loadingMessage.classList.remove('hidden');
             // Hide all subsequent sections when a new file is chosen
-            resultsContainer.classList.add('hidden');
-            chartContainer.classList.add('hidden');
-            actionButtons.classList.add('hidden');
-            domainSection.classList.add('hidden');
-            if (messageBox) messageBox.classList.add('hidden');
+            resultsContainer.classList.add('hidden');
+            chartContainer.classList.add('hidden');
+            actionButtons.classList.add('hidden');
+            domainSection.classList.add('hidden');
+            if (messageBox) messageBox.classList.add('hidden');
             if (scaleOrderMessageBox) scaleOrderMessageBox.classList.add('hidden');
             scaleOrderSection.classList.add('hidden'); // Hide scale order until parsed
             if (domainMessageBox) domainMessageBox.classList.add('hidden'); // Hide domain message box
 
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                try {
-                    const data = new Uint8Array(e.target.result);
-                    const workbook = XLSX.read(data, { type: 'array' });
-                    const firstSheetName = workbook.SheetNames[0];
-                    const worksheet = workbook.Sheets[firstSheetName];
-                    const parsedData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+                    const firstSheetName = workbook.SheetNames[0];
+                    const worksheet = workbook.Sheets[firstSheetName];
+                    const parsedData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
-                    if (parsedData.length < 2) {
-                        showMessage(languageData[currentLang].emptyFile, 'error');
-                        return;
-                    }
-                    
-                    sessionStorage.setItem('parsedData', JSON.stringify(parsedData));
+                    if (parsedData.length < 2) {
+                        showMessage(languageData[currentLang].emptyFile, 'error');
+                        return;
+                    }
+                    
+                    sessionStorage.setItem('parsedData', JSON.stringify(parsedData));
 
                     const identifiedResponses = new Set();
                     let dataToScanForResponses = [];
@@ -551,61 +485,61 @@
                     if (totalItemsDisplay) totalItemsDisplay.textContent = languageData[currentLang].totalItemsDisplay.replace('{total}', totalItemsInFile);
 
                     scaleOrderSection.classList.remove('hidden'); // Show ranking widget after file upload
-                } catch (error) {
-                    console.error("Error parsing or displaying data:", error);
-                    showMessage(languageData[currentLang].parseError, 'error');
-                } finally {
-                    if (loadingMessage) loadingMessage.classList.add('hidden');
-                }
-            };
-            reader.readAsArrayBuffer(file);
-        });
+                } catch (error) {
+                    console.error("Error parsing or displaying data:", error);
+                    showMessage(languageData[currentLang].parseError, 'error');
+                } finally {
+                    if (loadingMessage) loadingMessage.classList.add('hidden');
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        });
 
-        // Event listener for "Analyze Data" button
-        analyzeButton.addEventListener('click', () => {
-            const storedParsedData = JSON.parse(sessionStorage.getItem('parsedData'));
-            if (!storedParsedData) {
-                showMessage(languageData[currentLang].fileError, 'error');
-                return;
-            }
+        // Event listener for "Analyze Data" button
+        analyzeButton.addEventListener('click', () => {
+            const storedParsedData = JSON.parse(sessionStorage.getItem('parsedData'));
+            if (!storedParsedData) {
+                showMessage(languageData[currentLang].fileError, 'error');
+                return;
+            }
 
             if (currentScaleOptions.length === 0) {
                 showScaleOrderMessage(languageData[currentLang].scaleOrderEmpty, 'error');
                 return;
             }
 
-            const domainSizesInput = domainInput.value.trim();
-            const domainSizes = domainSizesInput.split(',').map(s => parseInt(s.trim(), 10)).filter(n => !isNaN(n) && n > 0);
-            
+            const domainSizesInput = domainInput.value.trim();
+            const domainSizes = domainSizesInput.split(',').map(s => parseInt(s.trim(), 10)).filter(n => !isNaN(n) && n > 0);
+            
             const totalItemsInFile = dataOrientation === 'vertical' ? storedParsedData.slice(1).length : storedParsedData[0].slice(1).length;
-            const totalItemsFromInput = domainSizes.reduce((sum, size) => sum + size, 0);
+            const totalItemsFromInput = domainSizes.reduce((sum, size) => sum + size, 0);
 
-            if (domainSizes.length > 0 && totalItemsFromInput !== totalItemsInFile) {
-                showDomainMessage(languageData[currentLang].domainItemsError.replace('{sum}', totalItemsFromInput).replace('{total}', totalItemsInFile), 'error');
-                return;
-            }
+            if (domainSizes.length > 0 && totalItemsFromInput !== totalItemsInFile) {
+                showDomainMessage(languageData[currentLang].domainItemsError.replace('{sum}', totalItemsFromInput).replace('{total}', totalItemsInFile), 'error');
+                return;
+            }
 
             if (domainSizes.length > 0) {
                 displayDomainResults(storedParsedData, domainSizes);
             } else {
                 displayFullResults(storedParsedData);
             }
-        });
-        
-        // Event listener for export button
-        exportButton.addEventListener('click', () => {
-            exportToXLSX();
-        });
+        });
+        
+        // Event listener for export button
+        exportButton.addEventListener('click', () => {
+            exportToXLSX();
+        });
 
         // Event listener for copy table button
         copyTableButton.addEventListener('click', () => {
             copyTableToClipboard();
         });
 
-        // Event listener for language toggle button
-        langToggle.addEventListener('click', () => {
-            toggleLanguage();
-        });
+        // Event listener for language toggle button
+        langToggle.addEventListener('click', () => {
+            toggleLanguage();
+        });
 
         // Event listener for data orientation toggle button
         dataOrientationToggle.addEventListener('click', () => {
@@ -615,23 +549,47 @@
         });
 
         // Event Listeners for new template buttons
-        if (showVerticalTemplateBtn) {
-            showVerticalTemplateBtn.addEventListener('click', () => {
-                displayTemplate('vertical');
-            });
+        if (downloadVerticalTemplateBtn) {
+            downloadVerticalTemplateBtn.addEventListener('click', downloadVerticalTemplate);
         }
 
-        if (showHorizontalTemplateBtn) {
-            showHorizontalTemplateBtn.addEventListener('click', () => {
-                displayTemplate('horizontal');
-            });
+        if (downloadHorizontalTemplateBtn) {
+            downloadHorizontalTemplateBtn.addEventListener('click', downloadHorizontalTemplate);
         }
 
-        if (closeTemplateGuideBtn) {
-            closeTemplateGuideBtn.addEventListener('click', () => {
-                if (templateGuideContainer) templateGuideContainer.classList.add('hidden');
-            });
+        /**
+         * Generates and downloads a vertical template XLSX file.
+         */
+        function downloadVerticalTemplate() {
+            const wb = XLSX.utils.book_new();
+            const ws_data = [
+                [languageData[currentLang].templateGuide.vtHeaderItem, languageData[currentLang].templateGuide.vtHeaderResp],
+                ['Question 1', 'Agree'],
+                ['Question 2', 'Neutral'],
+                ['Question 3', 'Disagree']
+            ];
+            const ws = XLSX.utils.aoa_to_sheet(ws_data);
+            XLSX.utils.book_append_sheet(wb, ws, "Vertical Template");
+            XLSX.writeFile(wb, "vertical_template.xlsx");
+            showMessage("Vertical template downloaded!", "info");
         }
+
+        /**
+         * Generates and downloads a horizontal template XLSX file.
+         */
+        function downloadHorizontalTemplate() {
+            const wb = XLSX.utils.book_new();
+            const ws_data = [
+                [languageData[currentLang].templateGuide.htHeaderEmpty, languageData[currentLang].templateGuide.htHeaderItem + ' 1', languageData[currentLang].templateGuide.htHeaderItem + ' 2', languageData[currentLang].templateGuide.htHeaderItem + ' 3'],
+                [languageData[currentLang].templateGuide.htRowResp + ' 1', 'Agree', 'Neutral', 'Disagree'],
+                [languageData[currentLang].templateGuide.htRowResp + ' 2', 'Neutral', 'Agree', 'Strongly Agree']
+            ];
+            const ws = XLSX.utils.aoa_to_sheet(ws_data);
+            XLSX.utils.book_append_sheet(wb, ws, "Horizontal Template");
+            XLSX.writeFile(wb, "horizontal_template.xlsx");
+            showMessage("Horizontal template downloaded!", "info");
+        }
+
 
         /**
          * Renders the scale options in the ranking widget.
@@ -722,13 +680,13 @@
             }
         }
 
-        /**
-         * Toggles the UI language between English and Arabic.
-         */
-        function toggleLanguage() {
-            currentLang = currentLang === 'en' ? 'ar' : 'en';
-            setLanguage(currentLang);
-        }
+        /**
+         * Toggles the UI language between English and Arabic.
+         */
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            setLanguage(currentLang);
+        }
 
         /**
          * Toggles the data orientation between 'vertical' and 'horizontal'.
@@ -749,29 +707,29 @@
             sessionStorage.removeItem('parsedData'); // Clear stored data
         }
 
-        /**
-         * Sets all UI text and direction based on the selected language.
-         * @param {string} lang The language code ('en' or 'ar').
-         */
-        function setLanguage(lang) {
-            const text = languageData[lang];
-            document.querySelector('html').lang = lang;
-            document.querySelector('html').dir = lang === 'ar' ? 'rtl' : 'ltr';
-            if (document.title) document.title = text.title;
-            if (document.getElementById('mainTitle')) document.getElementById('mainTitle').textContent = text.title;
-            if (document.getElementById('subtitle')) document.getElementById('subtitle').textContent = text.subtitle;
-            if (document.getElementById('fileButtonText')) document.getElementById('fileButtonText').textContent = text.fileButton;
-            if (loadingMessage) loadingMessage.textContent = text.loading;
-            if (document.getElementById('messageTitle')) document.getElementById('messageTitle').textContent = text.error;
+        /**
+         * Sets all UI text and direction based on the selected language.
+         * @param {string} lang The language code ('en' or 'ar').
+         */
+        function setLanguage(lang) {
+            const text = languageData[lang];
+            document.querySelector('html').lang = lang;
+            document.querySelector('html').dir = lang === 'ar' ? 'rtl' : 'ltr';
+            if (document.title) document.title = text.title;
+            if (document.getElementById('mainTitle')) document.getElementById('mainTitle').textContent = text.title;
+            if (document.getElementById('subtitle')) document.getElementById('subtitle').textContent = text.subtitle;
+            if (document.getElementById('fileButtonText')) document.getElementById('fileButtonText').textContent = text.fileButton;
+            if (loadingMessage) loadingMessage.textContent = text.loading;
+            if (document.getElementById('messageTitle')) document.getElementById('messageTitle').textContent = text.error;
             if (messageText) {
                 messageText.textContent = ''; // Clear message text on language change
             }
-            if (exportButton) exportButton.textContent = text.exportButton;
-            if (copyTableButton) copyTableButton.textContent = text.copyTableButton; // Set text for copy button
-            if (analyzeButton) analyzeButton.textContent = text.analyzeButton;
-            if (document.getElementById('domainTitle')) document.getElementById('domainTitle').textContent = text.domainTitle;
-            if (document.getElementById('domainSubtitle')) document.getElementById('domainSubtitle').textContent = text.domainSubtitle;
-            if (domainInput) domainInput.placeholder = text.domainSubtitle.split('(')[1].replace(')', '');
+            if (exportButton) exportButton.textContent = text.exportButton;
+            if (copyTableButton) copyTableButton.textContent = text.copyTableButton;
+            if (analyzeButton) analyzeButton.textContent = text.analyzeButton;
+            if (document.getElementById('domainTitle')) document.getElementById('domainTitle').textContent = text.domainTitle;
+            if (document.getElementById('domainSubtitle')) document.getElementById('domainSubtitle').textContent = text.domainSubtitle;
+            if (domainInput) domainInput.placeholder = text.domainSubtitle.split('(')[1].replace(')', '');
             if (totalItemsDisplay) totalItemsDisplay.textContent = text.totalItemsDisplay.replace('{total}', '');
 
             if (dataOrientationLabel) dataOrientationLabel.textContent = text.dataOrientationLabel;
@@ -784,50 +742,32 @@
             if (scaleOrderMessageText) {
                 scaleOrderMessageText.textContent = ''; // Clear message text on language change
             }
-            // New domain message box text
             if (domainMessageTitle) domainMessageTitle.textContent = text.error;
             if (domainMessageText) domainMessageText.textContent = '';
 
+            // Update template button text
+            if (downloadVerticalTemplateBtn) downloadVerticalTemplateBtn.textContent = text.templateButtons.vertical;
+            if (downloadHorizontalTemplateBtn) downloadHorizontalTemplateBtn.textContent = text.templateButtons.horizontal;
 
-            if (showVerticalTemplateBtn) showVerticalTemplateBtn.textContent = text.templateButtons.vertical;
-            if (showHorizontalTemplateBtn) showHorizontalTemplateBtn.textContent = text.templateButtons.horizontal;
-            if (templateGuideTitle) templateGuideTitle.textContent = text.templateGuide.title;
-            if (verticalTemplateContent) document.getElementById('verticalTemplateDescription').textContent = text.templateGuide.verticalDesc;
-            if (horizontalTemplateContent) document.getElementById('horizontalTemplateDescription').textContent = text.templateGuide.horizontalDesc;
-            if (document.getElementById('vtHeaderItem')) document.getElementById('vtHeaderItem').textContent = text.templateGuide.vtHeaderItem;
-            if (document.getElementById('vtHeaderResp1')) document.getElementById('vtHeaderResp1').textContent = text.templateGuide.vtHeaderResp;
-            if (document.getElementById('vtHeaderResp2')) document.getElementById('vtHeaderResp2').textContent = text.templateGuide.vtHeaderResp;
-            if (document.getElementById('htHeaderEmpty')) document.getElementById('htHeaderEmpty').textContent = text.templateGuide.htHeaderEmpty;
-            if (document.getElementById('htHeaderItem1')) document.getElementById('htHeaderItem1').textContent = text.templateGuide.htHeaderItem + ' 1';
-            if (document.getElementById('htHeaderItem2')) document.getElementById('htHeaderItem2').textContent = text.templateGuide.htHeaderItem + ' 2';
-            if (document.getElementById('htRow1Resp')) document.getElementById('htRow1Resp').textContent = text.templateGuide.htRowResp + ' 1';
-            if (document.getElementById('htRow2Resp')) document.getElementById('htRow2Resp').textContent = text.templateGuide.htRowResp + ' 2';
-
-            if (langEnSpan && langArSpan) {
-                if (lang === 'ar') {
+            if (langEnSpan && langArSpan) {
+                if (lang === 'ar') {
                     // Arabic is active: white background, blue text
-                    langEnSpan.classList.remove('bg-white', 'text-blue-600');
-                    langEnSpan.classList.add('bg-blue-600', 'text-white');
-                    langArSpan.classList.remove('bg-blue-600', 'text-white');
-                    langArSpan.classList.add('bg-white', 'text-blue-600');
-                } else {
+                    langEnSpan.classList.remove('bg-white', 'text-blue-600');
+                    langEnSpan.classList.add('bg-blue-600', 'text-white');
+                    langArSpan.classList.remove('bg-blue-600', 'text-white');
+                    langArSpan.classList.add('bg-white', 'text-blue-600');
+                } else {
                     // English is active: white background, blue text
-                    langEnSpan.classList.remove('bg-blue-600', 'text-white');
-                    langEnSpan.classList.add('bg-white', 'text-blue-600');
-                    langArSpan.classList.remove('bg-white', 'text-blue-600');
-                    langArSpan.classList.add('bg-blue-600', 'text-white');
-                }
-            }
-
-            if (templateGuideContainer) {
-                updateOrientationToggleStyle(dataOrientation); // This function also needs guarding internally
-                renderScaleOptions(); // This function also needs guarding internally
-                if (verticalTemplateContent && horizontalTemplateContent) { // Guarded here too
-                    const currentDisplayedTemplate = verticalTemplateContent.classList.contains('hidden') ? 'horizontal' : 'vertical';
-                    displayTemplate(currentDisplayedTemplate);
+                    langEnSpan.classList.remove('bg-blue-600', 'text-white');
+                    langEnSpan.classList.add('bg-white', 'text-blue-600');
+                    langArSpan.classList.remove('bg-white', 'text-blue-600');
+                    langArSpan.classList.add('bg-blue-600', 'text-white');
                 }
             }
-        }
+
+            updateOrientationToggleStyle(dataOrientation);
+            renderScaleOptions();
+        }
 
         /**
          * Updates the visual style for the data orientation toggle.
@@ -835,7 +775,7 @@
          * @param {string} orientation The selected orientation ('vertical' or 'horizontal').
          */
         function updateOrientationToggleStyle(orientation) {
-            if (!orientationVerticalSpan || !orientationHorizontalSpan) return; // Add null check here
+            if (!orientationVerticalSpan || !orientationHorizontalSpan) return;
 
             if (orientation === 'vertical') {
                 // Vertical is active: white background, blue text
@@ -852,37 +792,7 @@
             }
         }
 
-        /**
-         * Displays the appropriate template guide content.
-         * @param {string} orientation 'vertical' or 'horizontal'.
-         */
-        function displayTemplate(orientation) {
-            if (!templateGuideContainer || !templateGuideTitle || !verticalTemplateContent || !horizontalTemplateContent) return; // Guard all elements
-
-            templateGuideContainer.classList.remove('hidden');
-            templateGuideTitle.textContent = languageData[currentLang].templateGuide.title;
-
-            if (orientation === 'vertical') {
-                verticalTemplateContent.classList.remove('hidden');
-                horizontalTemplateContent.classList.add('hidden');
-                if (document.getElementById('verticalTemplateDescription')) document.getElementById('verticalTemplateDescription').textContent = languageData[currentLang].templateGuide.verticalDesc;
-                if (document.getElementById('vtHeaderItem')) document.getElementById('vtHeaderItem').textContent = languageData[currentLang].templateGuide.vtHeaderItem;
-                if (document.getElementById('vtHeaderResp1')) document.getElementById('vtHeaderResp1').textContent = languageData[currentLang].templateGuide.vtHeaderResp;
-                if (document.getElementById('vtHeaderResp2')) document.getElementById('vtHeaderResp2').textContent = languageData[currentLang].templateGuide.vtHeaderResp;
-            } else {
-                horizontalTemplateContent.classList.remove('hidden');
-                verticalTemplateContent.classList.add('hidden');
-                if (document.getElementById('horizontalTemplateDescription')) document.getElementById('horizontalTemplateDescription').textContent = languageData[currentLang].templateGuide.horizontalDesc;
-                if (document.getElementById('htHeaderEmpty')) document.getElementById('htHeaderEmpty').textContent = languageData[currentLang].templateGuide.htHeaderEmpty;
-                if (document.getElementById('htHeaderItem1')) document.getElementById('htHeaderItem1').textContent = languageData[currentLang].templateGuide.htHeaderItem + ' 1';
-                if (document.getElementById('htHeaderItem2')) document.getElementById('htHeaderItem2').textContent = languageData[currentLang].templateGuide.htHeaderItem + ' 2';
-                if (document.getElementById('htRow1Resp')) document.getElementById('htRow1Resp').textContent = languageData[currentLang].templateGuide.htRowResp + ' 1';
-                if (document.getElementById('htRow2Resp')) document.getElementById('htRow2Resp').textContent = languageData[currentLang].templateGuide.htRowResp + ' 2';
-            }
-        }
-
         // Initial setup: Hide all dynamic sections.
-        // fileUploadSection already has 'hidden' in HTML, so no need to add it here.
         if (scaleOrderSection) scaleOrderSection.classList.add('hidden');
         if (domainSection) domainSection.classList.add('hidden');
         if (actionButtons) actionButtons.classList.add('hidden');
@@ -892,47 +802,46 @@
         if (scaleOrderMessageBox) scaleOrderMessageBox.classList.add('hidden');
         if (domainMessageBox) domainMessageBox.classList.add('hidden');
 
-        // Initial call to set the language and the visual style of the orientation toggle.
-        // fileUploadSection is NOT shown here.
-        setLanguage(currentLang);
-        updateOrientationToggleStyle(dataOrientation); // Set initial style for data orientation
+        // Initial call to set the language and the visual style of the orientation toggle.
+        setLanguage(currentLang);
+        updateOrientationToggleStyle(dataOrientation);
 
-        /**
-         * Analyzes the full dataset and displays it in a single table and pie chart.
-         * @param {string[][]} parsedData The raw parsed XLSX data as a 2D array (including header row).
-         */
-        function displayFullResults(parsedData) {
-            if (!resultsContainer || !chartContainer) return; // Guard against null containers
+        /**
+         * Analyzes the full dataset and displays it in a single table and pie chart.
+         * @param {string[][]} parsedData The raw parsed XLSX data as a 2D array (including header row).
+         */
+        function displayFullResults(parsedData) {
+            if (!resultsContainer || !chartContainer) return;
             resultsContainer.setAttribute('data-view-mode', 'full');
-            const tableHtml = createTable(parsedData, 'full');
-            resultsContainer.innerHTML = tableHtml;
-            resultsContainer.classList.remove('hidden');
+            const tableHtml = createTable(parsedData, 'full');
+            resultsContainer.innerHTML = tableHtml;
+            resultsContainer.classList.remove('hidden');
 
-            destroyAllCharts();
-            chartContainer.innerHTML = `<div class="p-6 bg-gray-50 rounded-xl shadow-inner flex flex-col justify-center items-center">
-                <h3 class="text-lg font-semibold mb-4 text-gray-700" id="fullChartTitle"></h3>
-                <div class="h-64 w-full">
-                    <canvas id="fullResultsChart"></canvas>
-                </div>
-            </div>`;
-            if (document.getElementById('fullChartTitle')) document.getElementById('fullChartTitle').textContent = languageData[currentLang].chartTitle;
-            const chartData = calculatePieChartData(parsedData);
-            renderPieChart('fullResultsChart', languageData[currentLang].chartTitle, chartData);
-            chartContainer.classList.remove('hidden');
-        }
+            destroyAllCharts();
+            chartContainer.innerHTML = `<div class="p-6 bg-gray-50 rounded-xl shadow-inner flex flex-col justify-center items-center">
+                <h3 class="text-lg font-semibold mb-4 text-gray-700" id="fullChartTitle"></h3>
+                <div class="h-64 w-full">
+                    <canvas id="fullResultsChart"></canvas>
+                </div>
+            </div>`;
+            if (document.getElementById('fullChartTitle')) document.getElementById('fullChartTitle').textContent = languageData[currentLang].chartTitle;
+            const chartData = calculatePieChartData(parsedData);
+            renderPieChart('fullResultsChart', languageData[currentLang].chartTitle, chartData);
+            chartContainer.classList.remove('hidden');
+        }
 
-        /**
-         * Analyzes the data by domains and displays a table and pie chart for each domain.
-         * @param {string[][]} data The raw parsed XLSX data as a 2D array (including header row).
-         * @param {number[]} domainSizes An array of numbers representing the size of each domain.
-         */
-        function displayDomainResults(data, domainSizes) {
-            if (!resultsContainer || !chartContainer) return; // Guard against null containers
+        /**
+         * Analyzes the data by domains and displays a table and pie chart for each domain.
+         * @param {string[][]} data The raw parsed XLSX data as a 2D array (including header row).
+         * @param {number[]} domainSizes An array of numbers representing the size of each domain.
+         */
+        function displayDomainResults(data, domainSizes) {
+            if (!resultsContainer || !chartContainer) return;
             resultsContainer.setAttribute('data-view-mode', 'domain');
-            let itemStart = 0;
-            let allTablesHtml = '';
-            destroyAllCharts();
-            chartContainer.innerHTML = '';
+            let itemStart = 0;
+            let allTablesHtml = '';
+            destroyAllCharts();
+            chartContainer.innerHTML = '';
 
             let allItems;
             if (dataOrientation === 'vertical') {
@@ -941,85 +850,85 @@
                 allItems = data[0].slice(1);
             }
 
-            domainSizes.forEach((size, index) => {
-                let domainRawData;
-                if (dataOrientation === 'vertical') {
-                    domainRawData = [data[0], ...data.slice(1).slice(itemStart, itemStart + size)];
-                } else {
-                    const currentItems = allItems.slice(itemStart, itemStart + size);
-                    const itemIndices = currentItems.map(item => data[0].indexOf(item));
+            domainSizes.forEach((size, index) => {
+                let domainRawData;
+                if (dataOrientation === 'vertical') {
+                    domainRawData = [data[0], ...data.slice(1).slice(itemStart, itemStart + size)];
+                } else {
+                    const currentItems = allItems.slice(itemStart, itemStart + size);
+                    const itemIndices = currentItems.map(item => data[0].indexOf(item));
 
-                    let domainHeaderRow = [""];
-                    currentItems.forEach(item => domainHeaderRow.push(item));
+                    let domainHeaderRow = [""];
+                    currentItems.forEach(item => domainHeaderRow.push(item));
 
-                    let domainResponseRows = data.slice(1).map(row => {
-                        let newRow = [row[0]];
-                        itemIndices.forEach(idx => {
-                            newRow.push(row[idx]);
-                        });
-                        return newRow;
-                    });
-                    domainRawData = [domainHeaderRow, ...domainResponseRows];
-                }
+                    let domainResponseRows = data.slice(1).map(row => {
+                        let newRow = [row[0]];
+                        itemIndices.forEach(idx => {
+                            newRow.push(row[idx]);
+                        });
+                        return newRow;
+                    });
+                    domainRawData = [domainHeaderRow, ...domainResponseRows];
+                }
 
-                const tableId = `domainTable-${index}`;
-                const chartId = `domainChart-${index}`;
-                
-                const domainTitle = languageData[currentLang].domainNumber.replace('{number}', index + 1);
-                allTablesHtml += `<h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4">${domainTitle}</h3>`;
-                
-                allTablesHtml += createTable(domainRawData, tableId);
-                itemStart += size;
+                const tableId = `domainTable-${index}`;
+                const chartId = `domainChart-${index}`;
+                
+                const domainTitle = languageData[currentLang].domainNumber.replace('{number}', index + 1);
+                allTablesHtml += `<h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4">${domainTitle}</h3>`;
+                
+                allTablesHtml += createTable(domainRawData, tableId);
+                itemStart += size;
 
-                const chartTitle = languageData[currentLang].domainChartTitle.replace('{number}', index + 1);
-                const chartHtml = `<div class="p-6 bg-gray-50 rounded-xl shadow-inner flex flex-col justify-center items-center">
-                                     <h3 class="text-lg font-semibold mb-4 text-gray-700">${chartTitle}</h3>
-                                     <div class="h-64 w-full">
-                                        <canvas id="${chartId}"></canvas>
-                                     </div>
-                                 </div>`;
-                chartContainer.innerHTML += chartHtml;
+                const chartTitle = languageData[currentLang].domainChartTitle.replace('{number}', index + 1);
+                const chartHtml = `<div class="p-6 bg-gray-50 rounded-xl shadow-inner flex flex-col justify-center items-center">
+                                           <h3 class="text-lg font-semibold mb-4 text-gray-700">${chartTitle}</h3>
+                                           <div class="h-64 w-full">
+                                               <canvas id="${chartId}"></canvas>
+                                           </div>
+                                       </div>`;
+                chartContainer.innerHTML += chartHtml;
 
-            });
-            resultsContainer.innerHTML = allTablesHtml;
-            resultsContainer.classList.remove('hidden');
-            chartContainer.classList.remove('hidden');
+            });
+            resultsContainer.innerHTML = allTablesHtml;
+            resultsContainer.classList.remove('hidden');
+            chartContainer.classList.remove('hidden');
 
-            itemStart = 0;
-            domainSizes.forEach((size, index) => {
-                let domainRawData;
-                if (dataOrientation === 'vertical') {
-                    domainRawData = [data[0], ...data.slice(1).slice(itemStart, itemStart + size)];
-                } else {
-                    const currentItems = allItems.slice(itemStart, itemStart + size);
-                    const itemIndices = currentItems.map(item => data[0].indexOf(item));
-                    let domainHeaderRow = [""];
-                    currentItems.forEach(item => domainHeaderRow.push(item));
-                    let domainResponseRows = data.slice(1).map(row => {
-                        let newRow = [row[0]];
-                        itemIndices.forEach(idx => {
-                            newRow.push(row[idx]);
-                        });
-                        return newRow;
-                    });
-                    domainRawData = [domainHeaderRow, ...domainResponseRows];
-                }
-                const chartData = calculatePieChartData(domainRawData);
-                const chartId = `domainChart-${index}`;
-                const chartTitle = languageData[currentLang].domainChartTitle.replace('{number}', index + 1);
-                renderPieChart(chartId, chartTitle, chartData);
-                itemStart += size;
-            });
-        }
-        
-        /**
-         * Creates an HTML table from the given data, calculating stats.
-         * @param {string[][]} rawData The raw sliced data for a specific domain or the full dataset.
+            itemStart = 0;
+            domainSizes.forEach((size, index) => {
+                let domainRawData;
+                if (dataOrientation === 'vertical') {
+                    domainRawData = [data[0], ...data.slice(1).slice(itemStart, itemStart + size)];
+                } else {
+                    const currentItems = allItems.slice(itemStart, itemStart + size);
+                    const itemIndices = currentItems.map(item => data[0].indexOf(item));
+                    let domainHeaderRow = [""];
+                    currentItems.forEach(item => domainHeaderRow.push(item));
+                    let domainResponseRows = data.slice(1).map(row => {
+                        let newRow = [row[0]];
+                        itemIndices.forEach(idx => {
+                            newRow.push(row[idx]);
+                        });
+                        return newRow;
+                    });
+                    domainRawData = [domainHeaderRow, ...domainResponseRows];
+                }
+                const chartData = calculatePieChartData(domainRawData);
+                const chartId = `domainChart-${index}`;
+                const chartTitle = languageData[currentLang].domainChartTitle.replace('{number}', index + 1);
+                renderPieChart(chartId, chartTitle, chartData);
+                itemStart += size;
+            });
+        }
+        
+        /**
+         * Creates an HTML table from the given data, calculating stats.
+         * @param {string[][]} rawData The raw sliced data for a specific domain or the full dataset.
            * This data includes the header row for items.
-         * @param {string} tableId The ID for the table element.
-         * @returns {string} The HTML string for the table.
-         */
-        function createTable(rawData, tableId) {
+         * @param {string} tableId The ID for the table element.
+         * @returns {string} The HTML string for the table.
+         */
+        function createTable(rawData, tableId) {
             let dataToProcess;
             let items;
 
@@ -1038,289 +947,290 @@
                 items = dataToProcess.map(row => row[0]);
             }
 
-            const uniqueResponses = new Set();
-            dataToProcess.forEach(row => {
-                row.slice(1).forEach(response => {
-                    if (response && String(response).trim() !== '') {
-                        uniqueResponses.add(String(response).trim());
-                    }
-                });
-            });
-            const responseHeaders = Array.from(uniqueResponses).sort((a, b) => {
+            const uniqueResponses = new Set();
+            dataToProcess.forEach(row => {
+                row.slice(1).forEach(response => {
+                    if (response && String(response).trim() !== '') {
+                        uniqueResponses.add(String(response).trim());
+                    }
+                });
+            });
+            const responseHeaders = Array.from(uniqueResponses).sort((a, b) => {
                 const valA = currentResponseValueMap[a] || 0;
                 const valB = currentResponseValueMap[b] || 0;
                 return valB - valA;
             });
 
-            let headerRow1Html = '<tr>';
-            headerRow1Html += `<th scope="col" rowspan="2" class="px-6 py-3 border-b-2 border-gray-300">${languageData[currentLang].tableHeaders.no}</th>`;
-            headerRow1Html += `<th scope="col" rowspan="2" class="px-6 py-3 border-b-2 border-gray-300">${languageData[currentLang].tableHeaders.item}</th>`;
-            
-            responseHeaders.forEach(header => {
-                headerRow1Html += `<th scope="col" colspan="2" class="px-6 py-3 text-center border-b border-r border-l border-gray-300">${header}</th>`;
-            });
+            let headerRow1Html = '<tr>';
+            headerRow1Html += `<th scope="col" rowspan="2" class="px-6 py-3 border-b-2 border-gray-300">${languageData[currentLang].tableHeaders.no}</th>`;
+            headerRow1Html += `<th scope="col" rowspan="2" class="px-6 py-3 border-b-2 border-gray-300">${languageData[currentLang].tableHeaders.item}</th>`;
+            
+            responseHeaders.forEach(header => {
+                headerRow1Html += `<th scope="col" colspan="2" class="px-6 py-3 text-center border-b border-r border-l border-gray-300">${header}</th>`;
+            });
 
-            headerRow1Html += `<th scope="col" colspan="2" rowspan="2" class="px-6 py-3 text-center border-b border-r border-l border-gray-300">${languageData[currentLang].tableHeaders.total}</th>`;
-            headerRow1Html += `<th scope="col" rowspan="2" class="px-6 py-3 border-b-2 border-gray-300">${languageData[currentLang].tableHeaders.mean}</th>`;
-            headerRow1Html += `<th scope="col" rowspan="2" class="px-6 py-3 border-b-2 border-gray-300">${languageData[currentLang].tableHeaders.sd}</th>`;
-            headerRow1Html += `<th scope="col" rowspan="2" class="px-6 py-3 border-b-2 border-gray-300">${languageData[currentLang].tableHeaders.rank}</th>`;
-            headerRow1Html += '</tr>';
+            headerRow1Html += `<th scope="col" colspan="2" rowspan="2" class="px-6 py-3 text-center border-b border-r border-l border-gray-300">${languageData[currentLang].tableHeaders.total}</th>`;
+            headerRow1Html += `<th scope="col" rowspan="2" class="px-6 py-3 border-b-2 border-gray-300">${languageData[currentLang].tableHeaders.mean}</th>`;
+            headerRow1Html += `<th scope="col" rowspan="2" class="px-6 py-3 border-b-2 border-gray-300">${languageData[currentLang].tableHeaders.sd}</th>`;
+            headerRow1Html += `<th scope="col" rowspan="2" class="px-6 py-3 border-b-2 border-gray-300">${languageData[currentLang].tableHeaders.rank}</th>`;
+            headerRow1Html += '</tr>';
 
-            let headerRow2Html = '<tr>';
-            responseHeaders.forEach(() => {
-                headerRow2Html += `<th scope="col" class="px-6 py-3 text-center border-b border-l border-gray-300">${languageData[currentLang].tableHeaders.frequency}</th>`;
-                headerRow2Html += `<th scope="col" class="px-6 py-3 text-center border-b border-l border-gray-300">${languageData[currentLang].tableHeaders.percentage}</th>`;
-            });
-            headerRow2Html += '</tr>';
+            let headerRow2Html = '<tr>';
+            responseHeaders.forEach(() => {
+                headerRow2Html += `<th scope="col" class="px-6 py-3 text-center border-b border-l border-gray-300">${languageData[currentLang].tableHeaders.frequency}</th>`;
+                headerRow2Html += `<th scope="col" class="px-6 py-3 text-center border-b border-l border-gray-300">${languageData[currentLang].tableHeaders.percentage}</th>`;
+            });
+            headerRow2Html += '</tr>';
 
-            let tbodyHtml = '';
-            const itemStats = [];
-            
-            let domainFrequencies = {};
-            let domainPercentages = {};
-            let domainMeans = [];
-            let domainSDs = [];
+            let tbodyHtml = '';
+            const itemStats = [];
+            
+            let domainFrequencies = {};
+            let domainPercentages = {};
+            let domainMeans = [];
+            let domainSDs = [];
 
-            responseHeaders.forEach(header => {
-                domainFrequencies[header] = 0;
-                domainPercentages[header] = 0;
-            });
+            responseHeaders.forEach(header => {
+                domainFrequencies[header] = 0;
+                domainPercentages[header] = 0;
+            });
 
 
-            dataToProcess.forEach((row, itemIndex) => {
-                const item = row[0];
-                tbodyHtml += `<tr class="bg-white border-b hover:bg-gray-50">`;
-                tbodyHtml += `<td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">${itemIndex + 1}</td>`;
-                tbodyHtml += `<td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">${item}</td>`;
+            dataToProcess.forEach((row, itemIndex) => {
+                const item = row[0];
+                tbodyHtml += `<tr class="bg-white border-b hover:bg-gray-50">`;
+                tbodyHtml += `<td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">${itemIndex + 1}</td>`;
+                tbodyHtml += `<td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">${item}</td>`;
 
-                const currentItemResponses = row.slice(1).filter(response => response && String(response).trim() !== '');
-                const totalResponsesPerItem = currentItemResponses.length;
-                const numericResponses = [];
+                const currentItemResponses = row.slice(1).filter(response => response && String(response).trim() !== '');
+                const totalResponsesPerItem = currentItemResponses.length;
+                const numericResponses = [];
 
-                responseHeaders.forEach(responseHeader => {
-                    let frequency = 0;
-                    currentItemResponses.forEach(response => {
-                        if (response === responseHeader) {
-                            frequency++;
-                            const numericValue = currentResponseValueMap[response];
-                            if (numericValue !== undefined) {
-                                numericResponses.push(numericValue);
-                            }
-                        }
-                    });
+                responseHeaders.forEach(responseHeader => {
+                    let frequency = 0;
+                    currentItemResponses.forEach(response => {
+                        if (response === responseHeader) {
+                            frequency++;
+                            const numericValue = currentResponseValueMap[response];
+                            if (numericValue !== undefined) {
+                                numericResponses.push(numericValue);
+                            }
+                        }
+                    });
 
-                    const percentage = (totalResponsesPerItem > 0) ? (frequency / totalResponsesPerItem * 100) : 0;
-                    
-                    domainFrequencies[responseHeader] += frequency;
-                    domainPercentages[responseHeader] += percentage;
+                    const percentage = (totalResponsesPerItem > 0) ? (frequency / totalResponsesPerItem * 100) : 0;
+                    
+                    domainFrequencies[responseHeader] += frequency;
+                    domainPercentages[responseHeader] += percentage;
 
-                    tbodyHtml += `<td class="px-6 py-4 text-center border-l">${frequency}</td>`;
-                    tbodyHtml += `<td class="px-6 py-4 text-center border-l">${percentage.toFixed(1)}%</td>`;
-                });
+                    tbodyHtml += `<td class="px-6 py-4 text-center border-l">${frequency}</td>`;
+                    tbodyHtml += `<td class="px-6 py-4 text-center border-l">${percentage.toFixed(1)}%</td>`;
+                });
 
-                tbodyHtml += `<td class="px-6 py-4 text-center border-l font-bold text-gray-900">${totalResponsesPerItem}</td>`;
-                tbodyHtml += `<td class="px-6 py-4 text-center border-l font-bold text-gray-900">100.0%</td>`;
+                tbodyHtml += `<td class="px-6 py-4 text-center border-l font-bold text-gray-900">${totalResponsesPerItem}</td>`;
+                tbodyHtml += `<td class="px-6 py-4 text-center border-l font-bold text-gray-900">100.0%</td>`;
 
-                const n = numericResponses.length;
-                let mean = 'N/A';
-                let standardDeviation = 'N/A';
-                
-                if (n > 0) {
-                    const sum = numericResponses.reduce((acc, val) => acc + val, 0);
-                    mean = (sum / n);
+                const n = numericResponses.length;
+                let mean = 'N/A';
+                let standardDeviation = 'N/A';
+                
+                if (n > 0) {
+                    const sum = numericResponses.reduce((acc, val) => acc + val, 0);
+                    mean = (sum / n);
 
-                    if (n > 1) {
-                        const sumOfSquares = numericResponses.reduce((acc, val) => acc + Math.pow(val - mean, 2), 0);
-                        const variance = sumOfSquares / (n - 1);
-                        standardDeviation = Math.sqrt(variance);
-                    }
-                }
-                
-                if (!isNaN(mean) && mean !== 'N/A') {
-                    domainMeans.push(mean);
-                }
-                if (!isNaN(standardDeviation) && standardDeviation !== 'N/A') {
-                    domainSDs.push(standardDeviation);
-                }
-                itemStats.push({ item, mean: parseFloat(mean) });
+                    if (n > 1) {
+                        const sumOfSquares = numericResponses.reduce((acc, val) => acc + Math.pow(val - mean, 2), 0);
+                        const variance = sumOfSquares / (n - 1);
+                        standardDeviation = Math.sqrt(variance);
+                    }
+                }
+                
+                if (!isNaN(mean) && mean !== 'N/A') {
+                    domainMeans.push(mean);
+                }
+                if (!isNaN(standardDeviation) && standardDeviation !== 'N/A') {
+                    domainSDs.push(standardDeviation);
+                }
+                itemStats.push({ item, mean: parseFloat(mean) });
 
-                tbodyHtml += `<td class="px-6 py-4 text-center border-l font-bold">${mean !== 'N/A' ? mean.toFixed(2) : 'N/A'}</td>`;
-                tbodyHtml += `<td class="px-6 py-4 text-center border-l font-bold">${standardDeviation !== 'N/A' ? standardDeviation.toFixed(2) : 'N/A'}</td>`;
-                tbodyHtml += `<td class="px-6 py-4 text-center border-l font-bold" data-item-index="${itemIndex}"></td>`;
-                tbodyHtml += `</tr>`;
-            });
+                tbodyHtml += `<td class="px-6 py-4 text-center border-l font-bold">${mean !== 'N/A' ? mean.toFixed(2) : 'N/A'}</td>`;
+                tbodyHtml += `<td class="px-6 py-4 text-center border-l font-bold">${standardDeviation !== 'N/A' ? standardDeviation.toFixed(2) : 'N/A'}</td>`;
+                tbodyHtml += `<td class="px-6 py-4 text-center border-l font-bold" data-item-index="${itemIndex}"></td>`;
+                tbodyHtml += `</tr>`;
+            });
 
-            const sortedStats = [...itemStats].filter(stat => !isNaN(stat.mean)).sort((a, b) => b.mean - a.mean);
-            
-            let rank = 1;
-            const rankMap = new Map();
-            for (let i = 0; i < sortedStats.length; i++) {
-                if (i > 0 && sortedStats[i].mean < sortedStats[i-1].mean) {
-                    rank = i + 1;
-                }
-                rankMap.set(sortedStats[i].item, rank);
-            }
-            
-            for (let i = 0; i < dataToProcess.length; i++) {
-                const item = dataToProcess[i][0];
-                const rankValue = rankMap.get(item) || '';
-                tbodyHtml = tbodyHtml.replace(`data-item-index="${i}"`, `data-item-index="${i}">${rankValue}`);
-            }
-            
-            let tfootHtml = `<tfoot class="bg-gray-100 font-bold text-gray-900"><tr>`;
-            tfootHtml += `<td colspan="2" class="px-6 py-4 text-center border-t-2 border-gray-300">${languageData[currentLang].domainAverages}</td>`;
+            const sortedStats = [...itemStats].filter(stat => !isNaN(stat.mean)).sort((a, b) => b.mean - a.mean);
+            
+            let rank = 1;
+            const rankMap = new Map();
+            for (let i = 0; i < sortedStats.length; i++) {
+                if (i > 0 && sortedStats[i].mean < sortedStats[i-1].mean) {
+                    rank = i + 1;
+                }
+                rankMap.set(sortedStats[i].item, rank);
+            }
+            
+            for (let i = 0; i < dataToProcess.length; i++) {
+                const item = dataToProcess[i][0];
+                const rankValue = rankMap.get(item) || '';
+                tbodyHtml = tbodyHtml.replace(`data-item-index="${i}"`, `data-item-index="${i}">${rankValue}`);
+            }
+            
+            let tfootHtml = `<tfoot class="bg-gray-100 font-bold text-gray-900"><tr>`;
+            tfootHtml += `<td colspan="2" class="px-6 py-4 text-center border-t-2 border-gray-300">${languageData[currentLang].domainAverages}</td>`;
 
-            responseHeaders.forEach(header => {
-                const avgFrequency = (domainFrequencies[header] / dataToProcess.length).toFixed(1);
-                const avgPercentage = (domainPercentages[header] / dataToProcess.length).toFixed(1);
-                tfootHtml += `<td class="px-6 py-4 text-center border-l border-t-2 border-gray-300">${avgFrequency}</td>`;
-                tfootHtml += `<td class="px-6 py-4 text-center border-l border-t-2 border-gray-300">${avgPercentage}%</td>`;
-            });
+            responseHeaders.forEach(header => {
+                const avgFrequency = (domainFrequencies[header] / dataToProcess.length).toFixed(1);
+                const avgPercentage = (domainPercentages[header] / dataToProcess.length).toFixed(1);
+                tfootHtml += `<td class="px-6 py-4 text-center border-l border-t-2 border-gray-300">${avgFrequency}</td>`;
+                tfootHtml += `<td class="px-6 py-4 text-center border-l border-t-2 border-gray-300">${avgPercentage}%</td>`;
+            });
 
-            tfootHtml += `<td class="px-6 py-4 text-center border-l border-t-2 border-gray-300"></td>`;
-            tfootHtml += `<td class="px-6 py-4 text-center border-l border-t-2 border-gray-300"></td>`;
-            
-            const avgMean = domainMeans.length > 0 ? (domainMeans.reduce((sum, val) => sum + val, 0) / domainMeans.length).toFixed(2) : 'N/A';
-            const avgSD = domainSDs.length > 0 ? (domainSDs.reduce((sum, val) => sum + val, 0) / domainMeans.length).toFixed(2) : 'N/A';
+            tfootHtml += `<td class="px-6 py-4 text-center border-l border-t-2 border-gray-300"></td>`;
+            tfootHtml += `<td class="px-6 py-4 text-center border-l border-t-2 border-gray-300"></td>`;
+            
+            const avgMean = domainMeans.length > 0 ? (domainMeans.reduce((sum, val) => sum + val, 0) / domainMeans.length).toFixed(2) : 'N/A';
+            const avgSD = domainSDs.length > 0 ? (domainSDs.reduce((sum, val) => sum + val, 0) / domainMeans.length).toFixed(2) : 'N/A';
 
-            tfootHtml += `<td class="px-6 py-4 text-center border-l border-t-2 border-gray-300">${avgMean}</td>`;
-            tfootHtml += `<td class="px-6 py-4 text-center border-l border-t-2 border-gray-300">${avgSD}</td>`;
-            tfootHtml += `<td class="px-6 py-4 text-center border-l border-t-2 border-gray-300"></td>`;
-            tfootHtml += `</tr></tfoot>`;
+            tfootHtml += `<td class="px-6 py-4 text-center border-l border-t-2 border-gray-300">${avgMean}</td>`;
+            tfootHtml += `<td class="px-6 py-4 text-center border-l border-t-2 border-gray-300">${avgSD}</td>`;
+            tfootHtml += `<td class="px-6 py-4 text-center border-l border-t-2 border-gray-300"></td>`;
+            tfootHtml += `</tr></tfoot>`;
 
-            return `<table id="${tableId}" class="w-full text-sm text-right text-gray-500 rounded-lg overflow-hidden my-4">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                            ${headerRow1Html + headerRow2Html}
-                        </thead>
-                        <tbody>
-                            ${tbodyHtml}
-                        </tbody>
-                        ${tfootHtml}
-                    </table>`;
-        }
+            return `<table id="${tableId}" class="w-full text-sm text-right text-gray-500 rounded-lg overflow-hidden my-4">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                            ${headerRow1Html + headerRow2Html}
+                        </thead>
+                        <tbody>
+                            ${tbodyHtml}
+                        </tbody>
+                        ${tfootHtml}
+                    </table>`;
+        }
 
-        /**
-         * Calculates the data needed for a pie chart from a given dataset.
-         * @param {string[][]} rawData The raw parsed XLSX data (including header row).
-         * @returns {object} An object with labels and data for Chart.js.
-         */
-        function calculatePieChartData(rawData) {
-            let allResponses = [];
+        /**
+         * Calculates the data needed for a pie chart from a given dataset.
+         * @param {string[][]} rawData The raw parsed XLSX data (including header row).
+         * @returns {object} An object with labels and data for Chart.js.
+         */
+        function calculatePieChartData(rawData) {
+            let allResponses = [];
 
-            if (dataOrientation === 'vertical') {
-                allResponses = rawData.slice(1).flatMap(row => row.slice(1));
-            } else {
-                const responseValuesOnly = rawData.slice(1).map(row => row.slice(1));
-                const transposedResponseValues = transposeArray(responseValuesOnly);
-                allResponses = transposedResponseValues.flatMap(itemResponses => itemResponses);
-            }
+            if (dataOrientation === 'vertical') {
+                allResponses = rawData.slice(1).flatMap(row => row.slice(1));
+            } else {
+                const responseValuesOnly = rawData.slice(1).map(row => row.slice(1));
+                const transposedResponseValues = transposeArray(responseValuesOnly);
+                allResponses = transposedResponseValues.flatMap(itemResponses => itemResponses);
+            }
 
-            const responseCounts = {};
-            let totalResponses = 0;
+            const responseCounts = {};
+            let totalResponses = 0;
 
             const filteredResponses = allResponses.filter(response => response && String(response).trim() !== '');
 
-            const responseLabels = Object.keys(currentResponseValueMap).sort((a,b) => currentResponseValueMap[b] - currentResponseValueMap[a]);
+            const responseLabels = Object.keys(currentResponseValueMap).sort((a,b) => currentResponseValueMap[b] - currentResponseValueMap[a]);
 
-            responseLabels.forEach(label => responseCounts[label] = 0);
+            responseLabels.forEach(label => responseCounts[label] = 0);
 
-            filteredResponses.forEach(response => {
-                if (Object.keys(currentResponseValueMap).includes(response)) {
-                    responseCounts[response]++;
-                    totalResponses++;
-                }
-            });
+            filteredResponses.forEach(response => {
+                if (Object.keys(currentResponseValueMap).includes(response)) {
+                    responseCounts[response]++;
+                    totalResponses++;
+                }
+            });
 
-            const percentages = responseLabels.map(label => (responseCounts[label] / totalResponses) * 100);
-            return { labels: responseLabels, data: percentages };
-        }
+            const percentages = responseLabels.map(label => (responseCounts[label] / totalResponses) * 100);
+            return { labels: responseLabels, data: percentages };
+        }
 
-        /**
-         * Renders a pie chart using Chart.js.
-         * @param {string} canvasId The ID of the canvas element.
-         * @param {string} title The title of the chart.
-         * @param {object} chartData An object containing labels and data for the chart.
-         */
-        function renderPieChart(canvasId, title, chartData) {
-            const ctx = document.getElementById(canvasId);
-            if (!ctx) {
-                console.warn(`Canvas with ID '${canvasId}' not found.`);
-                return;
-            }
-            if (allCharts[canvasId]) {
-                allCharts[canvasId].destroy();
-            }
-            allCharts[canvasId] = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: chartData.labels,
-                    datasets: [{
-                        data: chartData.data,
-                        backgroundColor: responseColors,
-                        hoverOffset: 4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: title,
-                            font: {
-                                size: 16
-                            }
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    if (context.parsed !== null) {
-                                        label += context.parsed.toFixed(1) + '%';
-                            }
-                            }
-                            }
-                        },
-                        legend: {
-                            position: 'right',
-                            align: 'center',
-                            labels: {
-                                padding: 15,
-                                font: {
-                                    size: 12
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        }
+        /**
+         * Renders a pie chart using Chart.js.
+         * @param {string} canvasId The ID of the canvas element.
+         * @param {string} title The title of the chart.
+         * @param {object} chartData An object containing labels and data for the chart.
+         */
+        function renderPieChart(canvasId, title, chartData) {
+            const ctx = document.getElementById(canvasId);
+            if (!ctx) {
+                console.warn(`Canvas with ID '${canvasId}' not found.`);
+                return;
+            }
+            if (allCharts[canvasId]) {
+                allCharts[canvasId].destroy();
+            }
+            allCharts[canvasId] = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [{
+                        data: chartData.data,
+                        backgroundColor: responseColors,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: title,
+                            font: {
+                                size: 16
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += context.parsed.toFixed(1) + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        },
+                        legend: {
+                            position: 'right',
+                            align: 'center',
+                            labels: {
+                                padding: 15,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
 
-        /**
-         * Displays a message in the main message box.
-         * @param {string} message The message text.
-         * @param {string} type The type of message ('error' or 'info').
-         */
-        function showMessage(message, type) {
-            if (!messageBox || !messageText || !document.getElementById('messageTitle')) return; // Guard for null elements
+        /**
+         * Displays a message in the main message box.
+         * @param {string} message The message text.
+         * @param {string} type The type of message ('error' or 'info').
+         */
+        function showMessage(message, type) {
+            if (!messageBox || !messageText || !document.getElementById('messageTitle')) return;
             messageBox.classList.remove('hidden');
             messageText.textContent = message;
-            if (type === 'error') {
-                messageBox.classList.remove('bg-blue-100', 'border-blue-500', 'text-blue-700');
-                messageBox.classList.add('bg-red-100', 'border-red-500', 'text-red-700');
-                document.getElementById('messageTitle').textContent = languageData[currentLang].error;
-            } else {
-                messageBox.classList.remove('bg-red-100', 'border-red-500', 'text-red-700');
-                messageBox.classList.add('bg-blue-100', 'border-blue-500', 'text-blue-700');
-                document.getElementById('messageTitle').textContent = 'Info!';
-            }
-            setTimeout(() => {
-                if (messageBox) messageBox.classList.add('hidden');
-            }, 5000);
-        }
+            if (type === 'error') {
+                messageBox.classList.remove('bg-blue-100', 'border-blue-500', 'text-blue-700');
+                messageBox.classList.add('bg-red-100', 'border-red-500', 'text-red-700');
+                document.getElementById('messageTitle').textContent = languageData[currentLang].error;
+            } else {
+                messageBox.classList.remove('bg-red-100', 'border-red-500', 'text-red-700');
+                messageBox.classList.add('bg-blue-100', 'border-blue-500', 'text-blue-700');
+                document.getElementById('messageTitle').textContent = 'Info!';
+            }
+            setTimeout(() => {
+                if (messageBox) messageBox.classList.add('hidden');
+            }, 5000);
+        }
 
         /**
          * Displays a message in the scale order message box.
@@ -1328,7 +1238,7 @@
          * @param {string} type The type of message ('error' or 'info').
          */
         function showScaleOrderMessage(message, type) {
-            if (!scaleOrderMessageBox || !scaleOrderMessageText || !scaleOrderMessageTitle) return; // Guard for null elements
+            if (!scaleOrderMessageBox || !scaleOrderMessageText || !scaleOrderMessageTitle) return;
             scaleOrderMessageBox.classList.remove('hidden');
             scaleOrderMessageText.textContent = message;
             if (type === 'error') {
@@ -1351,7 +1261,7 @@
          * @param {string} type The type of message ('error' or 'info').
          */
         function showDomainMessage(message, type) {
-            if (!domainMessageBox || !domainMessageText || !domainMessageTitle) return; // Guard for null elements
+            if (!domainMessageBox || !domainMessageText || !domainMessageTitle) return;
             domainMessageBox.classList.remove('hidden');
             domainMessageText.textContent = message;
             if (type === 'error') {
@@ -1368,54 +1278,54 @@
             }, 5000);
         }
 
-        /**
-         * Exports the currently displayed table data to an XLSX file.
-         */
-        function exportToXLSX() {
-            const currentViewMode = resultsContainer ? resultsContainer.getAttribute('data-view-mode') : null;
-            let wb = XLSX.utils.book_new();
-            let fileName = 'questionnaire_analysis.xlsx';
+        /**
+         * Exports the currently displayed table data to an XLSX file.
+         */
+        function exportToXLSX() {
+            const currentViewMode = resultsContainer ? resultsContainer.getAttribute('data-view-mode') : null;
+            let wb = XLSX.utils.book_new();
+            let fileName = 'questionnaire_analysis.xlsx';
 
-            if (currentViewMode === 'full') {
-                const table = document.getElementById('full');
-                if (table) {
-                    const ws = XLSX.utils.table_to_sheet(table);
-                    XLSX.utils.book_append_sheet(wb, ws, "Full Analysis Results");
-                }
-            } else if (currentViewMode === 'domain') {
-                const domainTables = resultsContainer ? resultsContainer.querySelectorAll('table[id^="domainTable-"]') : [];
-                let combinedDataForExport = [];
+            if (currentViewMode === 'full') {
+                const table = document.getElementById('full');
+                if (table) {
+                    const ws = XLSX.utils.table_to_sheet(table);
+                    XLSX.utils.book_append_sheet(wb, ws, "Full Analysis Results");
+                }
+            } else if (currentViewMode === 'domain') {
+                const domainTables = resultsContainer ? resultsContainer.querySelectorAll('table[id^="domainTable-"]') : [];
+                let combinedDataForExport = [];
 
-                domainTables.forEach((table, index) => {
-                    combinedDataForExport.push([languageData[currentLang].domainNumber.replace('{number}', index + 1)]);
+                domainTables.forEach((table, index) => {
+                    combinedDataForExport.push([languageData[currentLang].domainNumber.replace('{number}', index + 1)]);
 
-                    const rows = table.querySelectorAll('tr');
-                    const tableAoA = [];
-                    rows.forEach(row => {
-                        const rowData = [];
-                        row.querySelectorAll('th, td').forEach(cell => {
-                            rowData.push(cell.textContent.trim());
-                        });
-                        tableAoA.push(rowData);
-                    });
-                    combinedDataForExport = combinedDataForExport.concat(tableAoA);
-                    combinedDataForExport.push([]);
-                });
+                    const rows = table.querySelectorAll('tr');
+                    const tableAoA = [];
+                    rows.forEach(row => {
+                        const rowData = [];
+                        row.querySelectorAll('th, td').forEach(cell => {
+                            rowData.push(cell.textContent.trim());
+                        });
+                        tableAoA.push(rowData);
+                    });
+                    combinedDataForExport = combinedDataForExport.concat(tableAoA);
+                    combinedDataForExport.push([]);
+                });
 
-                if (combinedDataForExport.length > 0) {
-                    const ws = XLSX.utils.aoa_to_sheet(combinedDataForExport);
-                    XLSX.utils.book_append_sheet(wb, ws, "Domain Analysis Results");
-                }
-                fileName = 'questionnaire_domain_analysis.xlsx';
-            }
+                if (combinedDataForExport.length > 0) {
+                    const ws = XLSX.utils.aoa_to_sheet(combinedDataForExport);
+                    XLSX.utils.book_append_sheet(wb, ws, "Domain Analysis Results");
+                }
+                fileName = 'questionnaire_domain_analysis.xlsx';
+            }
 
-            if (wb.SheetNames.length === 0) {
-                showMessage("No data to export. Please upload a file first.", 'info');
-                return;
-            }
+            if (wb.SheetNames.length === 0) {
+                showMessage("No data to export. Please upload a file first.", 'info');
+                return;
+            }
 
-            XLSX.writeFile(wb, fileName);
-        }
+            XLSX.writeFile(wb, fileName);
+        }
 
         /**
          * Copies the content of the currently displayed table(s) to the clipboard.
@@ -1479,17 +1389,17 @@
             return tableString;
         }
 
-        /**
-         * Destroys all Chart.js instances.
-         */
-        function destroyAllCharts() {
-            for (const chartId in allCharts) {
-                if (allCharts[chartId]) {
-                    allCharts[chartId].destroy();
-                }
-            }
-        }
+        /**
+         * Destroys all Chart.js instances.
+         */
+        function destroyAllCharts() {
+            for (const chartId in allCharts) {
+                if (allCharts[chartId]) {
+                    allCharts[chartId].destroy();
+                }
+            }
+        }
     });
-    </script>
+    </script>
 </body>
 </html>
